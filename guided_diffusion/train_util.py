@@ -76,6 +76,7 @@ class TrainLoop:
 
         self.step = 0
         self.resume_step = 0
+        self.epoch=0
         self.global_batch = self.batch_size * dist.get_world_size()
 
         self.sync_cuda = th.cuda.is_available()
@@ -169,10 +170,7 @@ class TrainLoop:
     def run_loop(self):
         i = 0
         data_iter = iter(self.dataloader)
-        while (
-            not self.lr_anneal_steps
-            or self.step + self.resume_step < self.lr_anneal_steps
-        ):
+        while (self.epoch<250):
 
 
             try:
@@ -182,7 +180,8 @@ class TrainLoop:
                     # reinitialize data loader
                     data_iter = iter(self.dataloader)
                     batch, cond, name = next(data_iter)
-
+                    self.epoch+=1
+                    print("Dataset Acabado: ",self.epoch)
             self.run_step(batch, cond)
 
            
