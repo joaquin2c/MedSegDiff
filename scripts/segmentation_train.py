@@ -38,6 +38,7 @@ def main():
         args.in_ch = 4
     if args.data_name == 'LIVER':
         tran_list = [
+            A.Resize(args.image_size,args.image_size),
             A.GridDistortion(p=0.5,distort_limit=(-0.03,0.03),border_mode=1),
             A.HorizontalFlip(p=0.2),
             A.VerticalFlip(p=0.2),

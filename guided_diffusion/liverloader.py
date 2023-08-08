@@ -47,7 +47,7 @@ class LiverDataset(Dataset):
 
         if self.transform:
             transformed = self.transform(image=img, mask=mask)
-            img = transformed["image"]
-            mask = transformed["mask"]
-
+            img = transforms.ToTensor()(transformed["image"])
+            mask = transforms.ToTensor()(transformed["mask"])
+            
         return (img, mask, name)
