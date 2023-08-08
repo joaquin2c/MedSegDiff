@@ -47,7 +47,7 @@ def main():
             A.RandomBrightnessContrast(brightness_limit=0.1, contrast_limit=0.1, brightness_by_max=False, always_apply=False, p=0.5),
             A.RandomGamma (gamma_limit=(80, 120), eps=None, always_apply=False, p=0.5),
         ]
-        transform_train = th.from_numpy(A.Compose(tran_list))
+        transform_train = A.Compose(tran_list)
 
         ds = LiverDataset(args, args.data_dir, transform_train)
         args.in_ch = 4
