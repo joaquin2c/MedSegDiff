@@ -170,9 +170,7 @@ class TrainLoop:
     def run_loop(self):
         i = 0
         data_iter = iter(self.dataloader)
-        while (self.epoch<250):
-
-
+        while (self.epoch<60):
             try:
                     batch, cond, name = next(data_iter)
             except StopIteration:
@@ -280,7 +278,7 @@ class TrainLoop:
             if dist.get_rank() == 0:
                 logger.log(f"saving model {rate}...")
                 if not rate:
-                    filename = f"savedmodel{(self.step+self.resume_step):06d}.pt"
+                    filename = f"savedmodel_{(self.step+self.resume_step):06d}.pt"
                 else:
                     filename = f"emasavedmodel_{rate}_{(self.step+self.resume_step):06d}.pt"
                 with bf.BlobFile(bf.join(get_blob_logdir(), filename), "wb") as f:

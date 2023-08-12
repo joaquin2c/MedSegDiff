@@ -44,7 +44,7 @@ class LiverDataset(Dataset):
         mask = cv2.imread(msk_path,cv2.IMREAD_GRAYSCALE)
         #img = Image.open(img_path)
         #mask = Image.open(msk_path).convert('L')
-
+	_,mask=cv2.threshold(mask,5,255,cv2.THRESH_BINARY)
         if self.transform:
             transformed = self.transform(image=img, mask=mask)
             img = transforms.ToTensor()(transformed["image"])

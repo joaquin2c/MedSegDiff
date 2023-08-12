@@ -39,18 +39,13 @@ def main():
     if args.data_name == 'LIVER':
         tran_list = [
             A.Resize(args.image_size,args.image_size),
-            A.GridDistortion(p=0.5,distort_limit=(-0.03,0.03),border_mode=1),
-            A.HorizontalFlip(p=0.2),
-            A.VerticalFlip(p=0.2),
-            A.Rotate (limit=5, interpolation=1, border_mode=1, value=None, crop_border=False, always_apply=False, p=0.5),
-            A.RandomRotate90 (p=0.2), 
-            A.RandomBrightnessContrast(brightness_limit=0.1, contrast_limit=0.1, brightness_by_max=False, always_apply=False, p=0.5),
-            A.RandomGamma (gamma_limit=(80, 120), eps=None, always_apply=False, p=0.5),
+	    A.RandomBrightnessContrast(brightness_limit=0.1, contrast_limit=0.1, p=0.5),
+            A.HorizontalFlip(p=0.5),
+            A.Rotate (limit=10, interpolation=1, border_mode=1, value=None, crop_border=False, always_apply=False, p=0.5),,
         ]
         transform_train = A.Compose(tran_list)
-
         ds = LiverDataset(args, args.data_dir, transform_train)
-        args.in_ch = 4
+        args.in_ch = 2
     elif args.data_name == 'BRATS':
         tran_list = [transforms.Resize((args.image_size,args.image_size)),]
         transform_train = transforms.Compose(tran_list)
