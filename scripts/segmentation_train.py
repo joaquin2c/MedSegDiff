@@ -41,7 +41,7 @@ def main():
             A.Resize(args.image_size,args.image_size),
 	    A.RandomBrightnessContrast(brightness_limit=0.1, contrast_limit=0.1, p=0.5),
             A.HorizontalFlip(p=0.5),
-            A.Rotate (limit=10, interpolation=1, border_mode=1, value=None, crop_border=False, always_apply=False, p=0.5),,
+            A.Rotate (limit=10, interpolation=1, border_mode=1, value=None, crop_border=False, always_apply=False, p=0.5),
         ]
         transform_train = A.Compose(tran_list)
         ds = LiverDataset(args, args.data_dir, transform_train)
