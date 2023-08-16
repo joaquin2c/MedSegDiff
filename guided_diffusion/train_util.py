@@ -170,7 +170,7 @@ class TrainLoop:
     def run_loop(self):
         i = 0
         data_iter = iter(self.dataloader)
-        while (self.epoch<60):
+        while (self.epoch<70):
             try:
                     batch, cond, name = next(data_iter)
             except StopIteration:
